@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.router {
   text-align: center;
-  background-image: url("./img/indir.jpg");
+  background-image: url("./movieBG.jpg");
   background-color: rgba(0,0,0,0.5);
   background-blend-mode: overlay;
-  padding: 1rem;
+  padding:1rem;
+  min-height:100vh;
+  background-size: contain;
+  
 }
 
 .App-logo {
@@ -50,5 +53,13 @@
   justify-content: space-between;
   text-decoration:none;
   list-style:none;
-  font-size: 20px;
+  color:red;
+  background-color:rgba(19,85,124,0.6);
+  padding: 5px 8px;
+  border-radius: 3px;
+
 }
+
+/* .pagination li{
+  border:1px solid red
+} */
