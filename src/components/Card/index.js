@@ -8,9 +8,10 @@ const styleAddButton={
     color: "white",
     backgroundColor: "rgba(19,85,124,0.8)",
     borderColor: "rgb(145, 86, 168)",
-    padding: "3px",
+    padding: "7px",
     borderRadius: "5px",
     borderWidth: "3px ",
+    fontSize:"1rem"
     
 }
 
@@ -55,7 +56,7 @@ export const Card = ({ movie }) => {
            
             <StyledTitleWrapper>{movie.title}</StyledTitleWrapper>
             <StyledImgWrapper src={movie.poster_path ? imgUrl:defaultImg}/>
-                <StyledFooterWrapper>
+                <StyledFooterWrapper style={{justifyContent: flag? 'space-between' : 'center'}}>
                     {
                         divEl
                     }
@@ -63,7 +64,7 @@ export const Card = ({ movie }) => {
                         pathname: `/movie/${movie.title}`,
                         state: { ...movie }
                     }}>
-                        <button type="">Go To Detail {">>>"}</button>
+                        <button type="" style={styleAddButton}>Details {">>>"}</button>
                     </Link>
                 
                 </StyledFooterWrapper>

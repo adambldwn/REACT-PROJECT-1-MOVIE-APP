@@ -32,9 +32,9 @@ export const Navbar = (props) => {
             
         </div>
     ) : (
-            <div>
-                <button onClick={() => history.push("/login")}>Login </button>
-                <button onClick={() => history.push("/signup")}>SignUp </button>
+            <div style={{ display: "flex", flexDirection: 'row', gap: 15}}>
+                <button onClick={() => history.push("/login")} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Login </button>
+                <button onClick={() => history.push("/signup")} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>SignUp </button>
             </div>
         )
 

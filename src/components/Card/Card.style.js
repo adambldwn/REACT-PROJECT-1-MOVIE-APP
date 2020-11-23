@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const StyledCardWrapper = styled.div`
 padding-top: 15px;
+padding-bottom: 10px;
 width: 320px;
 height: 500px;
 color: #bdbdbd;

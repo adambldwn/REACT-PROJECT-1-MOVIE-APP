@@ -48,18 +48,33 @@
 
 .pagination{
   display: flex;
-  width: 500px;
+  width: 35%;
   margin:auto;
   justify-content: space-between;
   text-decoration:none;
   list-style:none;
-  color:red;
+  color: white;
   background-color:rgba(19,85,124,0.6);
-  padding: 5px 8px;
-  border-radius: 3px;
-
+  padding: 8px 24px;
+  border-radius: 8px;
 }
 
-/* .pagination li{
-  border:1px solid red
-} */
+.pagination :hover {
+  cursor: pointer;
+  
+}
+
+.info{
+  visibility: hidden;
+  
+  
+}
+
+.anaInfo:hover{
+  background-blend-mode: overlay;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.anaInfo:hover .info{
+  visibility: visible;
+}
