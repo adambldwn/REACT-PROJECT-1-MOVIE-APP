@@ -3,7 +3,6 @@ import {auth} from "../../firebase/fbconfig"
 import { useHistory } from "react-router-dom"
 
 
-
 export const Reset = ({setReset}) => {
 
     const history = useHistory()

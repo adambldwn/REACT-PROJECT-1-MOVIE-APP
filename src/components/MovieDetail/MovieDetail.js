@@ -21,6 +21,7 @@ export const MovieDetail = ({ location: { state } }) => {
     const [formflag, setFormFlag] = useState(false);
     const [error, setError] = useState(null)
     const [simMovie, setsimMovie] = useState();
+    const [favArray, setfavArray] = useState([]);
 
     const styleAddButton = {
         color: "white",
@@ -42,6 +43,13 @@ export const MovieDetail = ({ location: { state } }) => {
         borderWidth: "3px ",
         fontSize: "1rem",
     }
+    const config = async () => {
+        let myArray = []
+        let data = await db.collection("favoriteMovies").get();
+        data.docs?.map(mov => myArray.push(mov.data().title))
+        setfavArray(myArray)
+      };
+    console.log(favArray)
 
     const fetchData = async () => {
 
@@ -53,9 +61,10 @@ export const MovieDetail = ({ location: { state } }) => {
         const simData = await axios.get(`https://api.themoviedb.org/3/movie/${state.id}/similar?api_key=2ab876e9698659187d8d9420ef4d232c&language=en-US&page=1`)
         setsimMovie(simData.data.results)
     }
-    console.log(simMovie)
+    
 
     useEffect(() => {
+        config()
         fetchData()
         similarData()
     }, [])
@@ -84,6 +93,7 @@ export const MovieDetail = ({ location: { state } }) => {
                 "value": val
             })
             setFormFlag(!formflag)
+            setError(null)
         } catch (error) {
             setError(error)
         }
@@ -100,8 +110,7 @@ export const MovieDetail = ({ location: { state } }) => {
     const addFirestore = () => {
 
         if (favArray.indexOf(state.title) < 0) {
-            console.log(favArray)
-            favArray.push(state.title)
+            
             db.collection("favoriteMovies").add(fav)
         }
 
