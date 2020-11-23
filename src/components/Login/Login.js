@@ -22,7 +22,7 @@ export const Login = ({ setLogin, setReset }) => {
 
     return (
         <div>
-            <button onClick={() => setLogin(false)} style={{position: 'absolute', top: 0, right: 0,fontSize: 20, color: 'red', border: 'none', background: 'rgba(255,255,255,0.8)'}}>
+            <button onClick={() => setLogin(false)} style={{position: 'absolute', top: 0, right: 0,fontSize: 20, color: 'white', border: 'none', background: 'red'}}>
                 X
             </button>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: 400, width: 300, justifyContent: 'space-around', borderRadius: 15 }}>

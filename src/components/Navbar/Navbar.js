@@ -102,7 +102,7 @@ export const Navbar = (props) => {
                 style={modalStyles}
 
             >
-                <SignUp/>
+                <SignUp setSign={setSign}/>
 
             </Modal>
 

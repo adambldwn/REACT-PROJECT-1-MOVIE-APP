@@ -19,6 +19,9 @@ export const Reset = ({setReset}) => {
 
     return (
         <div>
+            <button onClick={() => setReset(false)} style={{position: 'absolute', top: 0, right: 0,fontSize: 20, color: 'white', border: 'none', background: 'red'}}>
+                X
+            </button>
             <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: 400, width: 300 , justifyContent: 'space-around', borderRadius: 15}}>
 
                 <div>
