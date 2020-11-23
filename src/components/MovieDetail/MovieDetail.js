@@ -4,6 +4,8 @@ import ModalVideo from 'react-modal-video';
 import Modal from 'react-modal';
 import { auth, db } from '../../firebase/fbconfig';
 import { MovieInput } from './MovieInput.style';
+import { Card } from '../Card';
+import { StyledMoviesWrapper } from '../CardList/CardList.style';
 
 
 
@@ -104,30 +106,27 @@ export const MovieDetail = ({ location: { state } }) => {
 
     return (
         <div>
-
-
             <div style={{ color: "white", display: "flex", justifyContent: 'space-around', paddingTop: 30 }}>
 
-                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                    
 
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
 
                     <div
                         className="anaInfo"
-                        style={{ backgroundImage: `url(${imageURL})`, width: 500, height: 500, backgroundSize: 'cover', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
+                        style={{ backgroundImage: `url(${imageURL})`, marginTop: 15 , width: 500, height: 500, backgroundSize: 'cover', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
                     >
 
-                        <div className="info" style={{height: 80}}>
+                        <div className="info" style={{ height: 80 }}>
 
                             <button style={styleAddButton} onClick={addFirestore}>Add To Fav</button>
-                            <button style={flag?styleRate: {display: "none"}} onClick={rateMovie}>Rate Movie</button>
+                            <button style={flag ? styleRate : { display: "none" }} onClick={rateMovie}>Rate Movie</button>
 
-                            <form onSubmit={handleSubmit} style={{ display: formflag ? "flex" : "none", marginTop: 30, alignItems:'center', justifyContent:'center' }}>
-                                
-                                <MovieInput type="number" onChange={(e) => setVal(e.target.value)}/>
+                            <form onSubmit={handleSubmit} style={{ display: formflag ? "flex" : "none", marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
+
+                                <MovieInput type="number" onChange={(e) => setVal(e.target.value)} />
                                 <button type="submit" style={styleAddButton}>send</button>
                             </form>
-                            <p style={{fontFamily: " 'Lobster', cursive ", letterSpacing: 2, fontSize: "1.2rem"}}>{error ? "Input value must be number and between 0-10" : null}</p>
+                            <p style={{ fontFamily: " 'Lobster', cursive ", letterSpacing: 2, fontSize: "1.2rem" }}>{error ? "Input value must be number and between 0-10" : null}</p>
 
                         </div>
 
@@ -137,10 +136,12 @@ export const MovieDetail = ({ location: { state } }) => {
 
                 </div>
 
-                <div >
-                    <p>{state.title}</p>
-                    <p>{state.overview}</p>
-                    <p>{state.release_date}</p>
+                <div style={{ fontFamily: " 'Source Sans Pro', sans-serif ", fontSize: "1.5rem", fontWeight: 'bold', display: 'flex', flexDirection:'column' , alignItems:'center' }}>
+                    <div style={{width: "850px"}}>
+                        <p style={{marginBlockStart: 10}}>{state.title}</p>
+                        <p style={{marginBlockEnd: 10}}>{state.overview}</p>
+                        <p style={{marginBlockStart: 10, marginBlockEnd: 15 ,color: '#e1f5fe'}}>Release Date: {state.release_date}</p>
+                    </div>
 
                     <div>
                         <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trackId}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -148,8 +149,52 @@ export const MovieDetail = ({ location: { state } }) => {
 
                 </div>
 
-
             </div>
+            
+            <div>
+                <p style={{backgroundColor: "rgba(255,255,255,0.6)", width: '30%',borderRadius: 10, margin: '30px auto 0px ', padding: 6, fontWeight: 'bold', color: '#1a237e'}}>Similar Movies</p>
+            </div>
+
+            <StyledMoviesWrapper>
+                {
+                    simMovie?.map((mov)=>{
+                        return(
+                            <Card movie={mov}/>
+                        )
+                    })
+                }
+            </StyledMoviesWrapper>
         </div>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// adult: false
+// backdrop_path: "/rcQZmnhcb6P4mkgJAHnCYp3c1gp.jpg"
+// genre_ids: (4) [14, 18, 35, 10751]
+// id: 11395
+// original_language: "en"
+// original_title: "The Santa Clause"
+// overview: "Scott Calvin is an ordinary man, who accidentally causes Santa Claus to fall from his roof on Christmas Eve and is knocked unconscious. When he and his young son finish Santa's trip and deliveries, they go to the North Pole, where Scott learns he must become the new Santa and convince those he loves that he is indeed, Father Christmas."
+// popularity: 37.024
+// poster_path: "/tBHDVtEcMl06FbCURRLGVg3TpXp.jpg"
+// release_date: "1994-11-11"
+// title: "The Santa Clause"
+// video: false
+// vote_average: 6.4
+// vote_count: 1278

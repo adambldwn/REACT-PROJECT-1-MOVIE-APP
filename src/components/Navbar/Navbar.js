@@ -1,12 +1,38 @@
 import React, { useEffect } from 'react'
 import { Link, useHistory } from "react-router-dom"
+import Modal from 'react-modal';
 import { useState } from 'react/cjs/react.development'
 import { auth } from "../../firebase/fbconfig"
 import logo from '../../img/Logo.png'
 import { Search } from '../Search.js'
+import { Login } from '../Login/Login';
+import { SignUp } from '../SignUp/SignUp';
+import { Reset } from '../Reset/Reset';
 
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: "rgba(255,255,255,0.8)",
+    },
+    overlay: {
+        width: '900px',
+        height: '700px',
+        backgroundColor: "rgba(0,0,0,0.5)",
+        margin: "150px auto",
+
+    }
+};
 
 export const Navbar = (props) => {
+    const [isLogin, setLogin] = useState(false)
+    const [isSign, setSign] = useState(false)
+    const [isReset, setReset] = useState(false)
+
 
     const [flag, setFlag] = useState(false)
     const history = useHistory()
@@ -15,6 +41,8 @@ export const Navbar = (props) => {
         auth.onAuthStateChanged(user => {
             if (user) {
                 setFlag(true)
+                setLogin(false)
+                setSign(false)
             } else {
                 setFlag(false)
             }
@@ -22,19 +50,19 @@ export const Navbar = (props) => {
     }, [])
 
     const divEl = flag ? (
-        <div style={{ display: "flex", flexDirection: 'row', gap: 15}}>
+        <div style={{ display: "flex", flexDirection: 'row', gap: 15 }}>
 
             <button style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>
                 <Link to="/favorites" style={{ color: "red", textDecoration: "none" }}>Favorites</Link>
             </button>
 
-            <button onClick={() => auth.signOut() } style={{ padding: 10, borderRadius: 8, fontSize: 20}}>Logout </button>
-            
+            <button onClick={() => auth.signOut()} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Logout </button>
+
         </div>
     ) : (
-            <div style={{ display: "flex", flexDirection: 'row', gap: 15}}>
-                <button onClick={() => history.push("/login")} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Login </button>
-                <button onClick={() => history.push("/signup")} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>SignUp </button>
+            <div style={{ display: "flex", flexDirection: 'row', gap: 15 }}>
+                <button onClick={() => setLogin(true)} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Login </button>
+                <button onClick={() => setSign(true)} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>SignUp </button>
             </div>
         )
 
@@ -45,11 +73,44 @@ export const Navbar = (props) => {
                     <img src={logo} style={{ marginLeft: 5.5 }} />
                 </Link>
             </div>
+
+            <Modal
+                isOpen={isSign}
+                shouldCloseOnOverlayClick={true}
+
+                style={modalStyles}
+
+            >
+                <SignUp/>
+
+            </Modal>
+
+            <Modal
+                isOpen={isLogin}
+                shouldCloseOnOverlayClick={true}
+                style={modalStyles}
+            >
+                <Login setLogin={setLogin} setReset={setReset}/>
+
+            </Modal>
+
+            <Modal
+                isOpen={isReset}
+                shouldCloseOnOverlayClick={true}
+                style={modalStyles}
+            >
+                <Reset setReset={setReset}/>
+
+            </Modal>
+
+            
+
             <Search />
 
             {
                 divEl
             }
+
         </div>
     )
 }

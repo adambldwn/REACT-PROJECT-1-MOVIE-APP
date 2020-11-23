@@ -23,7 +23,8 @@ export const Card = ({ movie }) => {
     
     const fav = {
         title:movie.title,
-        path: movie.poster_path
+        path: movie.poster_path,
+        
     }
 
     const addFirestore= () => {

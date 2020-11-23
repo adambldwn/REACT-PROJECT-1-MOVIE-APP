@@ -4,21 +4,18 @@ import { useHistory } from "react-router-dom"
 
 
 
-export const Login = ({setLogin, setReset}) => {
+export const Reset = ({setReset}) => {
+
     const history = useHistory()
+    
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    
     const [error, setError] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        auth.signInWithEmailAndPassword(email,password).then(u=> history.push("/")).catch(e => setError(e)) 
+        auth.sendPasswordResetEmail(email).then(u=> setReset(false)).catch(e => setError(e)) 
     } 
-
-    const handleReset = () => {
-        setLogin(false)
-        setReset(true)
-    }
 
     return (
         <div>
@@ -29,15 +26,8 @@ export const Login = ({setLogin, setReset}) => {
                 <input id="email" type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} style={{display:'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2'}}/>
                 </div>
 
-                <div>
-                <label for="password">Password</label> 
-                <input type="password" placeholder="password" onChange={(e)=> setPassword(e.target.value)} style={{display:'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2'}}/>
-                <p style={{textAlign: 'right'}}>
-                    <button onClick={handleReset}>Forgot Password?</button>
-                </p>
-                </div>
 
-                <button className="loginSubmit" type="submit" >Submit</button>
+                <button className="loginSubmit" type="submit" >Reset</button>
                 <p style={{color:'red', margin: '0 auto'}}>{error ? error.message: null}</p>
             </form>
         </div>
