@@ -73,7 +73,7 @@ export const Favorites = () => {
       {favList?.map((mov) => (
         <StyledCardWrapper style={{ margin: 20 }}>
           <p>{mov.data().title}</p>
-          <StyledImgWrapper src={imgUrl + mov.data().path} />
+          <StyledImgWrapper src={imgUrl + mov.data().poster_path} />
 
           <StyledFooterWrapper>
 
@@ -82,7 +82,7 @@ export const Favorites = () => {
             <Link
               to={{
                 pathname: `/movie/${mov.data().title}`,
-                state: { ...mov.data(), poster_path: mov.data().path },
+                state: { ...mov.data()}
               }}
             >
               <StyledButton type="">Go To Detail {">>>"}</StyledButton>

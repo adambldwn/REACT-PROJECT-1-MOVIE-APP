@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import { Search } from '../Search.js';
 import { StyledCardListWrapper, StyledMoviesWrapper } from './CardList.style';
-import { MovieContex } from "../../Router/App"
+import { MovieContex } from "../../Router/Router"
 
 
 export const CardList = (props) => {
-    const { fetchMovies, movieList, setSearchedValue } = useContext(MovieContex)
+    const { fetchMovies, movieList } = useContext(MovieContex)
 
     return (
 

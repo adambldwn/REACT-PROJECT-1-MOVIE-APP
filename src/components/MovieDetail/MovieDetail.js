@@ -89,8 +89,13 @@ export const MovieDetail = ({ location: { state } }) => {
         }
     }
     const fav = {
+        id: state.id,
         title: state.title,
-        path: state.poster_path
+        poster_path: state.poster_path,
+        release_date: state.release_date,
+        vote_average: state.vote_average,
+        overview: state.overview
+
     }
     const addFirestore = () => {
 
@@ -113,7 +118,7 @@ export const MovieDetail = ({ location: { state } }) => {
 
                     <div
                         className="anaInfo"
-                        style={{ backgroundImage: `url(${imageURL})`, marginTop: 15 , width: 500, height: 500, backgroundSize: 'cover', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
+                        style={{ backgroundImage: `url(${imageURL})`, marginTop: 15, width: 500, height: 500, backgroundSize: 'cover', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
                     >
 
                         <div className="info" style={{ height: 80 }}>
@@ -136,11 +141,11 @@ export const MovieDetail = ({ location: { state } }) => {
 
                 </div>
 
-                <div style={{ fontFamily: " 'Source Sans Pro', sans-serif ", fontSize: "1.5rem", fontWeight: 'bold', display: 'flex', flexDirection:'column' , alignItems:'center' }}>
-                    <div style={{width: "850px"}}>
-                        <p style={{marginBlockStart: 10}}>{state.title}</p>
-                        <p style={{marginBlockEnd: 10}}>{state.overview}</p>
-                        <p style={{marginBlockStart: 10, marginBlockEnd: 15 ,color: '#e1f5fe'}}>Release Date: {state.release_date}</p>
+                <div style={{ fontFamily: " 'Source Sans Pro', sans-serif ", fontSize: "1.5rem", fontWeight: 'bold', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ width: "850px" }}>
+                        <p style={{ marginBlockStart: 10 }}>{state.title}</p>
+                        <p style={{ marginBlockEnd: 10 }}>{state.overview}</p>
+                        <p style={{ marginBlockStart: 10, marginBlockEnd: 15, color: '#e1f5fe' }}>Release Date: {state.release_date}</p>
                     </div>
 
                     <div>
@@ -150,16 +155,16 @@ export const MovieDetail = ({ location: { state } }) => {
                 </div>
 
             </div>
-            
+
             <div>
-                <p style={{backgroundColor: "rgba(255,255,255,0.6)", width: '30%',borderRadius: 10, margin: '30px auto 0px ', padding: 6, fontWeight: 'bold', color: '#1a237e'}}>Similar Movies</p>
+                <p style={{ backgroundColor: "rgba(255,255,255,0.6)", width: '30%', borderRadius: 10, margin: '30px auto 0px ', padding: 6, fontWeight: 'bold', color: '#1a237e' }}>Similar Movies</p>
             </div>
 
             <StyledMoviesWrapper>
                 {
-                    simMovie?.map((mov)=>{
-                        return(
-                            <Card movie={mov}/>
+                    simMovie?.map((mov) => {
+                        return (
+                            <Card movie={mov} />
                         )
                     })
                 }
