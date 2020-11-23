@@ -37,6 +37,22 @@ export const Navbar = (props) => {
     const [flag, setFlag] = useState(false)
     const history = useHistory()
 
+    const loginOps = () => {
+        setLogin(true)
+        setSign(false)
+        setReset(false)
+    }
+    const resetOps = () => {
+        setLogin(false)
+        setSign(false)
+        setReset(true)
+    }
+    const signOps = () => {
+        setLogin(false)
+        setSign(true)
+        setReset(false)
+    }
+
     useEffect(() => {
         auth.onAuthStateChanged(user => {
             if (user) {
@@ -61,16 +77,21 @@ export const Navbar = (props) => {
         </div>
     ) : (
             <div style={{ display: "flex", flexDirection: 'row', gap: 15 }}>
-                <button onClick={() => setLogin(true)} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Login </button>
-                <button onClick={() => setSign(true)} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>SignUp </button>
+                <button onClick={loginOps} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>Login </button>
+                <button onClick={signOps} style={{ padding: 10, borderRadius: 8, fontSize: 20 }}>SignUp </button>
             </div>
         )
 
+        // style={{ color: "white", borderRadius: 40, height: 80, width: 80, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+
+        
+
     return (
         <div style={{ display: "flex", backgroundColor: "rgba(30,30,30,0.7)", justifyContent: "space-between", color: "white", padding: 10, alignItems: "center" }}>
-            <div style={{ color: "white", borderRadius: 40, height: 80, width: 80, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
+            <div>
                 <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-                    <img src={logo} style={{ marginLeft: 5.5 }} />
+                    <img src={logo} style={{ marginLeft: 15, width: 90, height: 90, zIndex: 1 }} />
                 </Link>
             </div>
 
