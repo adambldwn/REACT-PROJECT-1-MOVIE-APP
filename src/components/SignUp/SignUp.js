@@ -26,15 +26,15 @@ export const SignUp = ({setSign}) => {
 
                 <div>
                     <label for="name">Name</label>
-                    <input id="name" type="text" placeholder="name" onChange={(e) => setName(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
+                    <input id="name" autoComplete="off" type="text" placeholder="name" onChange={(e) => setName(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
                 </div>
                 <div>
                     <label for="lastName">Last name</label>
-                    <input id="lastName" type="text" placeholder="lastName" onChange={(e) => setLastName(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
+                    <input id="lastName" autoComplete="off" type="text" placeholder="lastName" onChange={(e) => setLastName(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input id="email" type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
+                    <input id="email" autoComplete="off" type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
                 </div>
 
                 <div>

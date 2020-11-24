@@ -54,8 +54,6 @@ export const Router = () => {
                     <Route exact path="/" component={CardList} />
                     <Route exact path="/favorites" component={Favorites} />
                     <Route exact path="/movie/:moviename" component={MovieDetail} />
-                    <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/login" component={Login} />
                 </Switch>
             </MovieContex.Provider>
         </div>

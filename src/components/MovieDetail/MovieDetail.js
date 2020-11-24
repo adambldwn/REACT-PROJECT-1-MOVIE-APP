@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ModalVideo from 'react-modal-video';
-import Modal from 'react-modal';
 import { auth, db } from '../../firebase/fbconfig';
 import { MovieInput } from './MovieInput.style';
 import { Card } from '../Card';
@@ -48,20 +46,30 @@ export const MovieDetail = ({ location: { state } }) => {
         let data = await db.collection("favoriteMovies").get();
         data.docs?.map(mov => myArray.push(mov.data().title))
         setfavArray(myArray)
-      };
-    console.log(favArray)
+    };
+
 
     const fetchData = async () => {
 
-        const { data: { results } } = await axios.get(`https://api.themoviedb.org/3/movie/${state.id}/videos?api_key=2ab876e9698659187d8d9420ef4d232c&language=en-US`)
-        setTrackId(results[0].key)
+        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${state.id}/videos?api_key=2ab876e9698659187d8d9420ef4d232c&language=en-US`)
+        let track = data.results == true ? "2kX_UpQ-Nz4" : data?.results[0]?.key
+        setTrackId(track)
     }
 
+
+
     const similarData = async () => {
+        let empty ;
         const simData = await axios.get(`https://api.themoviedb.org/3/movie/${state.id}/similar?api_key=2ab876e9698659187d8d9420ef4d232c&language=en-US&page=1`)
-        setsimMovie(simData.data.results)
+        
+        if(simData.data.results.length== 0){
+            empty = await axios.get(`https://api.themoviedb.org/3/movie/12180/similar?api_key=2ab876e9698659187d8d9420ef4d232c&language=en-US&page=1`)
+            setsimMovie(empty.data.results)
+        }else{
+            setsimMovie(simData.data.results)
+        }
     }
-    
+
 
     useEffect(() => {
         config()
@@ -110,7 +118,7 @@ export const MovieDetail = ({ location: { state } }) => {
     const addFirestore = () => {
 
         if (favArray.indexOf(state.title) < 0) {
-            
+
             db.collection("favoriteMovies").add(fav)
         }
 
@@ -120,33 +128,33 @@ export const MovieDetail = ({ location: { state } }) => {
 
     return (
         <div>
-            <div style={{ color: "white", display: "flex", justifyContent: 'space-around', paddingTop: 30 }}>
+            <div style={{ color: "white", display: "flex", justifyContent: 'space-around', paddingTop: 30, paddingBottom: 30 }}>
 
 
-                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', position: 'relative' }}>
 
                     <div
-                        className="anaInfo"
-                        style={{ backgroundImage: `url(${imageURL})`, marginTop: 15, width: 500, height: 500, backgroundSize: 'cover', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
+                        className={flag ? "anaInfo" : null}
+                        style={{ marginTop: 35, width: 300, height: 450, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', borderRadius: 15 }}
                     >
+                        <img src={imageURL} style={{ marginTop: 45, width: 440, height: 560, borderRadius: 8 }} />
 
-                        <div className="info" style={{ height: 80 }}>
+                        <div className="info" style={{ height: 80, backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', width: 440, height: 560, marginTop: 45, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <div>
+                                <button style={flag ? styleAddButton : { display: "none" }} onClick={addFirestore}>Add To Fav</button>
+                                <button style={flag ? styleRate : { display: "none" }} onClick={rateMovie}>Rate Movie</button>
 
-                            <button style={styleAddButton} onClick={addFirestore}>Add To Fav</button>
-                            <button style={flag ? styleRate : { display: "none" }} onClick={rateMovie}>Rate Movie</button>
+                                <form onSubmit={handleSubmit} style={{ display: formflag ? "flex" : "none", marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
 
-                            <form onSubmit={handleSubmit} style={{ display: formflag ? "flex" : "none", marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
-
-                                <MovieInput type="number" onChange={(e) => setVal(e.target.value)} />
-                                <button type="submit" style={styleAddButton}>send</button>
-                            </form>
-                            <p style={{ fontFamily: " 'Lobster', cursive ", letterSpacing: 2, fontSize: "1.2rem" }}>{error ? "Input value must be number and between 0-10" : null}</p>
-
+                                    <MovieInput type="number" onChange={(e) => setVal(e.target.value)} />
+                                    <button type="submit" style={styleAddButton}>send</button>
+                                </form>
+                                <p style={{ fontFamily: " 'Lobster', cursive ", letterSpacing: 2, fontSize: "1.2rem" }}>{error ? "Input value must be number and between 0-10" : null}</p>
+                            </div>
                         </div>
 
-                        <p style={{ position: 'absolute', right: 0, top: 0, backgroundColor: "orange", padding: 5, color: 'black', marginBlockStart: 0 }}>{state.vote_average}</p>
-
                     </div>
+                    <p style={{ position: 'absolute', right: -70, top: 3, backgroundColor: "orange", padding: 5, color: 'black', marginBlockStart: 0 }}>{state.vote_average}</p>
 
                 </div>
 

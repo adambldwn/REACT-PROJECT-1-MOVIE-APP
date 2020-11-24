@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { auth } from "../../firebase/fbconfig"
 import { useHistory } from "react-router-dom"
-import close from '../../img/close.jpg'
+
 
 
 export const Login = ({ setLogin, setReset }) => {
@@ -28,7 +28,7 @@ export const Login = ({ setLogin, setReset }) => {
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: 400, width: 300, justifyContent: 'space-around', borderRadius: 15 }}>
                 <div>
                     <label for="email">Email</label>
-                    <input id="email" type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
+                    <input id="email" type="email" placeholder="email" autoComplete="off" onChange={(e) => setEmail(e.target.value)} style={{ display: 'block', padding: 6, marginTop: 7, borderRadius: 7, width: '93%', outline: 'none', border: '1px solid #005cb2' }} />
                 </div>
 
                 <div>
